@@ -1,0 +1,51 @@
+<?php
+    $e = $this->element;
+    $labelHelper = $this->formLabel();
+    $label = $e->getLabel();
+    $labelHelperTranlator = $labelHelper->getTranslator();
+    if($label AND $labelHelperTranlator) {
+        $label = $labelHelperTranlator->translate($label, $labelHelper->getTranslatorTextDomain());
+    }
+    $extended = $e->getOption('extended');
+    $required = ($e->getAttribute('required') == 'required') ? 'required="required"' : false;
+    $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
+?>
+
+<div class="control-group <?php if($err){ echo "error";}?>">
+    
+    <label class="control-label" for="<?= $e->getAttribute('id'); ?>">
+        <?php if($label) { ?><?php if($required) { echo '<em>*</em>'; } ?><?= $label; ?><?php } ?>
+    </label>
+    
+    <div class="controls">
+    <div class="<?= $e->getAttribute('class'); ?>" id="<?= $e->getAttribute('id'); ?>" style="height: 200px;margin-bottom: 0px;"></div>
+              
+    <?php if(count($extended['help']) > 0) { ?>
+    <span class="help-block">
+        <?php if($labelHelperTranlator) { 
+            echo $labelHelperTranlator->translate($extended['help']['content'], $labelHelper->getTranslatorTextDomain());
+        } else {
+            echo $extended['help']['content'];
+        } ?>
+    </span>
+    <?php } ?>
+    </div>
+    <?php if($err) { ?>
+    <ul>
+    <?php foreach($err as $k => $v) { ?>
+    	<li><?php if($labelHelperTranlator) { 
+            echo $labelHelperTranlator->translate($v, $labelHelper->getTranslatorTextDomain());
+        } else {
+            echo $v;
+        } ?></li>
+    <?php } ?>
+    </ul>
+    <?php } ?>
+    
+</div>
+
+<?php $this->placeholder($e->getJsHolderName())->captureStart() ?>
+var myOptions = {zoom: 8, mapTypeId: google.maps.MapTypeId.ROADMAP, center: new google.maps.LatLng(46.15, 14.9)};
+var map = new google.maps.Map(document.getElementById("<?= $e->getAttribute('id'); ?>"), myOptions);
+$('#<?= $e->getAttribute('id'); ?>').data('map', map);
+<?php $this->placeholder($e->getJsHolderName())->captureEnd() ?>

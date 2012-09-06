@@ -1,0 +1,59 @@
+<?php
+    $e = $this->element;
+    $labelHelper = $this->formLabel();
+    $label = $e->getLabel();
+    $labelHelperTranlator = $labelHelper->getTranslator();
+    if($label AND $labelHelperTranlator) {
+        $label = $labelHelperTranlator->translate($label, $labelHelper->getTranslatorTextDomain());
+    }
+    $extended = $e->getOption('extended');
+    if($e->getAttribute('type') == 'checkbox') {
+        $name = $e->getName().'[]';
+        $values = $e->getValue();
+    } else {
+        $name = $e->getName();
+        $values = array(0 => $e->getValue());
+    }
+    $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
+?>
+<div class="ctrlHolder">
+    <p class="label">
+        <?php if($label) { ?><?php if($e->getAttribute('required') == 'required') { echo '<em>*</em>'; } ?><?= $label; ?><?php } ?>
+    </p>
+    <ul <?php if($extended['compact']) { echo 'class="alternate"'; } ?>>
+        <?php foreach($e->getOption('value_options') as $key => $value) { ?>
+        <li>
+            <label for="<?= $this->slugify($e->getName().'-'.$key); ?>">
+            <input type="<?= $e->getAttribute('type'); ?>"
+                   value="<?= $key; ?>" <?php if(is_array($values) && in_array($key, $values)){ echo 'checked="checked"'; } ?> 
+                   name="<?= $name; ?>" id="<?= $this->slugify($e->getName().'-'.$key); ?>">
+            <?php if($labelHelperTranlator) { 
+                echo $labelHelperTranlator->translate($value, $labelHelper->getTranslatorTextDomain());
+            } else {
+                echo $value;
+            } ?>
+            </label>
+        </li>
+        <?php } ?>
+    </ul>
+    <?php if(count($extended['help']) > 0) { ?>
+    <p class="formHint">
+        <?php if($labelHelperTranlator) { 
+            echo $labelHelperTranlator->translate($extended['help']['content'], $labelHelper->getTranslatorTextDomain());
+        } else {
+            echo $extended['help']['content'];
+        } ?>
+    </p>
+    <?php } ?>
+    <?php if($err) { ?>
+    <ul>
+    <?php foreach($err as $k => $v) { ?>
+    	<li><?php if($labelHelperTranlator) { 
+            echo $labelHelperTranlator->translate($v, $labelHelper->getTranslatorTextDomain());
+        } else {
+            echo $v;
+        } ?></li>
+    <?php } ?>
+    </ul>
+    <?php } ?>
+</div>
