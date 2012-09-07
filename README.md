@@ -103,4 +103,12 @@ Usage
 You would do it better
 ----------------------
 
-Feel free to improve it. Will merge them to the project and thank you.
+Feel free to improve it. Will merge them in to the project and thank you.
+
+TODO
+---
+
+* Many element view scripts look the same, only difference is the js part. 
+Refactor all same lloking elements in to one viewscript.
+* Write some decent documentation.
+* Demo module is on it's way.

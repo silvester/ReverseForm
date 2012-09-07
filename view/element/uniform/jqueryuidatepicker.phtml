@@ -38,5 +38,7 @@
 </div>
 
 <?php $this->placeholder($e->getJsHolderName())->captureStart() ?>
+<?php if($in = $e->getInlineJs()) { printf($in, $e->getAttribute('id')); } else { ?>
 $('#<?= $e->getAttribute('id'); ?>').datepicker();
+<?php } ?>
 <?php $this->placeholder($e->getJsHolderName())->captureEnd() ?>

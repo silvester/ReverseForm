@@ -99,6 +99,20 @@ class TestForm extends Form
         
         $this->add(
         	array(
+        		'name' => 'daterangepicker',
+        		'type' => '\ReverseForm\Element\JqueryUiDateRangePicker',
+        		'attributes' => array('required' => 'required'),
+        		'options' => array(
+        			'label' => 'Ui daterangepicker',
+        			'extended' => array(
+                        'help'      => array('content' => 'Some UI daterangepicker')
+                    )
+        		)
+        	)
+        );
+        
+        $this->add(
+        	array(
         		'name' => 'bootstrap-datepicker',
         		'type' => '\ReverseForm\Element\BootstrapDatepicker',
         		'attributes' => array('required' => 'required'),
