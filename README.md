@@ -24,9 +24,8 @@ Currently I provide 2 types of renderers, but it is simple to create other rende
  extending the ReverseForm\Renderer.
 
 * ReverseForm\Renderer\Uniform renders the form with extra markup to make it work with 
-[Uni-Form](http://sprawsm.com/uni-form/) Uni-Form.
-* ReverseForm\Renderer\Bootstrap obviously renders 
-[Twitter Bootstrap](http://twitter.github.com/bootstrap/) Twitter bootstrap.
+[Uni-Form](http://sprawsm.com/uni-form/).
+* ReverseForm\Renderer\Bootstrap obviously renders [Twitter Bootstrap](http://twitter.github.com/bootstrap/).
 
 ### Uniform Renderer
 
@@ -35,7 +34,7 @@ Currently I provide 2 types of renderers, but it is simple to create other rende
     $formRenderer = $this->formRenderer($form, 'renderer.uniform', 'vertical'); // vertical or horizontal
     $formRenderer->prepare(); // this is how you create it in your viewscript
 
-Get your css from [Uni-Form](http://sprawsm.com/uni-form/) Uni-Form. Check the path to load the files in the module_config.php.
+Get your css from [Uni-Form](http://sprawsm.com/uni-form/). Check the path to load the files in the module_config.php.
 
 ### Bootstrap Renderer
 
