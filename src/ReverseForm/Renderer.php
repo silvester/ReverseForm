@@ -126,6 +126,11 @@ class Renderer implements ServiceManagerAwareInterface
                     $this->view->headLink()->appendStylesheet($c);
                 }
             }
+            
+            if($inlineJs = $element->getInlineJs() AND strlen($inlineJs) > 0) {
+            	$this->view->placeholder($this->getJsHolderName())
+            		->append(sprintf($inlineJs, $element->getAttribute('id')));
+            }
 
         }
 
@@ -275,6 +280,7 @@ class Renderer implements ServiceManagerAwareInterface
         $conf = $this->serviceManager->get('config');
         $this->globalFormConfig = $conf['reverse_form'];
         $this->localConfig = $this->globalFormConfig[get_class($this)];
+        return $this;
     }
 
 }

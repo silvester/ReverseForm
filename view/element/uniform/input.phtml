@@ -1,6 +1,5 @@
 <?php
     $e = $this->element;
-    $e->setAttribute('css');
     $labelHelper = $this->formLabel();
     $label = $e->getLabel();
     $labelHelperTranlator = $labelHelper->getTranslator();
@@ -9,7 +8,6 @@
     }
     $extended = $e->getOption('extended');
     $required = ($e->getAttribute('required') == 'required') ? 'required="required"' : false;
-    $type = ($e->getAttribute('type')) ? $e->getAttribute('type') : 'text';
     $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
 ?>
 
