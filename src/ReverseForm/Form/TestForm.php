@@ -9,9 +9,9 @@ class TestForm extends Form
 
     public function __construct()
     {
-        
+
         parent::__construct();
-        
+
         $this->setName('test');
         $this->setAttribute('method', 'post');
 
@@ -26,7 +26,7 @@ class TestForm extends Form
                 'label' => 'Artist',
             ),
         ));
-        
+
         $this->add(array(
             'name' => 'file',
             'attributes' => array(
@@ -53,110 +53,110 @@ class TestForm extends Form
                 )
             ),
         ));
-        
+
         $this->add(
-        	array(
-        		'name' => 'gmap',
-        		'type' => '\ReverseForm\Element\GoogleMap',
-        		'options' => array(
-        			'label' => 'Google Map',
-        			'extended' => array(
+            array(
+                'name' => 'gmap',
+                'type' => '\ReverseForm\Element\GoogleMap',
+                'options' => array(
+                    'label' => 'Google Map',
+                    'extended' => array(
                         'help'      => array('content' => 'Some Google Map')
-                     )
-        		)
-        	)
+                    )
+                )
+            )
         );
-        
+
         $this->add(
-        	array(
-        		'name' => 'datepicker',
-        		'type' => '\ReverseForm\Element\JqueryUiDatepicker',
-        		'attributes' => array('required' => 'required'),
-        		'options' => array(
-        			'label' => 'Ui datepicker',
-        			'extended' => array(
-                        'help'      => array('content' => 'Some UI datepicker'), 
+            array(
+                'name' => 'datepicker',
+                'type' => '\ReverseForm\Element\JqueryUiDatepicker',
+                'attributes' => array('required' => 'required'),
+                'options' => array(
+                    'label' => 'Ui datepicker',
+                    'extended' => array(
+                        'help'      => array('content' => 'Some UI datepicker'),
                         'js'        => array(2 => '/js/jqueryui/ui/i18n/jquery.ui.datepicker-sl.js'), // add i18n support
                         'append'    => 'some stuff' // only in twitter bootstrap
                     )
-        		)
-        	)
+                )
+            )
         );
-        
+
         $this->add(
-        	array(
-        		'name' => 'datetimepicker',
-        		'type' => '\ReverseForm\Element\JqueryUiDatetimepicker',
-        		'attributes' => array('required' => 'required'),
-        		'options' => array(
-        			'label' => 'Ui datetimepicker',
-        			'extended' => array(
+            array(
+                'name' => 'datetimepicker',
+                'type' => '\ReverseForm\Element\JqueryUiDatetimepicker',
+                'attributes' => array('required' => 'required'),
+                'options' => array(
+                    'label' => 'Ui datetimepicker',
+                    'extended' => array(
                         'help'      => array('content' => 'Some UI datetimepicker'),
-        				'inlineJsConfig' => array('closeText' => 'Kapat')
+                        'inlineJsConfig' => array('closeText' => 'Kapat')
                     )
-        		)
-        	)
+                )
+            )
         );
-        
+
         //echo $this->get('datetimepicker')->getConfig();
-        
+
         $this->add(
-        	array(
-        		'name' => 'daterangepicker',
-        		'type' => '\ReverseForm\Element\JqueryUiDateRangePicker',
-        		'attributes' => array('required' => 'required'),
-        		'options' => array(
-        			'label' => 'Ui daterangepicker',
-        			'extended' => array(
-                        'help'      => array('content' => 'Some UI daterangepicker')
+            array(
+                'name' => 'daterangepicker',
+                'type' => '\ReverseForm\Element\JqueryUiDateRangePicker',
+                'attributes' => array('required' => 'required'),
+                'options' => array(
+                    'label' => 'Ui daterangepicker',
+                    'extended' => array(
+                        'help' => array('content' => 'Some UI daterangepicker')
                     )
-        		)
-        	)
+                )
+            )
         );
-        
-        
-        
+
+
+
         $this->add(
-        	array(
-        		'name' => 'bootstrap-datepicker',
-        		'type' => '\ReverseForm\Element\BootstrapDatepicker',
-        		'attributes' => array('required' => 'required'),
-        		'options' => array(
-        			'label' => 'Boostrap datepicker',
-        			'extended' => array(
+            array(
+                'name' => 'bootstrap-datepicker',
+                'type' => '\ReverseForm\Element\BootstrapDatepicker',
+                'attributes' => array('required' => 'required'),
+                'options' => array(
+                    'label' => 'Boostrap datepicker',
+                    'extended' => array(
                         'help' => array('content' => 'Bootstrap datepicker')
                     )
-        		)
-        	)
+                )
+            )
         );
-        
+
         $this->add(array(
             'name' => 'status',
-        	'required' => true,
+            'required' => true,
             'attributes' => array('type' => 'checkbox', 'required' => 'required', 'value' => 1),
             'options' => array(
-                'label' => 'Status', 
+                'label' => 'Status',
                 'extended' => array('help' => array('content' => 'some help'), 'compact' => false),
                 'value_options'   => array(1 => 'ON', 0 => 'OFF'),
             )
         ));
-        
+
         $this->add(array(
             'name' => 'status2',
             'attributes' => array('type' => 'radio', 'required' => 'required', 'value' => 2),
             'options' => array(
-                'label' => 'Status 2', 
+                'label' => 'Status 2',
                 'extended' => array('help' => array('content' => 'some help 2'), 'compact' => true),
                 'value_options'   => array(1 => 'ON', 0 => 'OFF'),
             )
         ));
-        
+
         $this->add(array(
             'name' => 'status3',
             'type'  => 'Zend\Form\Element\Select',
             'attributes' => array('required' => 'required', 'value' => 2),
             'options' => array(
-                'label'     => 'Status 3', 
+                'label'     => 'Status 3',
                 'extended'  => array('help' => array('content' => 'some help 3')),
                 'value_options'   => array(1 => 'ON', 0 => 'OFF'),
             )
@@ -178,8 +178,8 @@ class TestForm extends Form
         ));
 
         $this->add($actions);
-        
-        
+
+
         $this->add(array(
             'name' => 'countrytextarea',
             'attributes' => array(
@@ -194,7 +194,7 @@ class TestForm extends Form
             'type' => 'Zend\Form\Element\Csrf',
             'name' => 'security'
         ));
-        
+
     }
 
 }
