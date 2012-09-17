@@ -161,6 +161,27 @@ class TestForm extends Form
                 'value_options'   => array(1 => 'ON', 0 => 'OFF'),
             )
         ));
+        
+        $this->add(array(
+        	'name' => 'status4',
+        	'type'  => 'ReverseForm\Element\ChosenSelect',
+        	'attributes' => array('required' => 'required', 'value' => 2),
+        	'options' => array(
+        		'label'     => 'Status 4',
+        		'extended'  => array('help' => array('content' => 'some help 4')),
+        		'value_options'   => array(1 => 'ON', 0 => 'OFF'),
+        	)
+        ));
+        
+        $this->add(array(
+        	'name' => 'codemirrortest',
+        	'type'  => 'ReverseForm\Element\CodeMirror',
+        	'attributes' => array('required' => 'required', 'value' => '', 'rows' => 10),
+        	'options' => array(
+        		'label'     => 'CodeMirror',
+        		'extended'  => array('help' => array('content' => 'CodeMirror'))
+        	)
+        ));
 
 
         $actions = new \Zend\Form\Fieldset('actions');

@@ -4,10 +4,10 @@ namespace ReverseForm\Element;
 
 use ReverseForm\ExtendedElement;
 
-class GoogleMap extends ExtendedElement
+class CodeMirror extends ExtendedElement
 {
     protected $attributes = array(
-        'type' => 'googlemap',
+        'type' => 'textarea'
     );
 
 }
