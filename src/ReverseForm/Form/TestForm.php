@@ -91,11 +91,14 @@ class TestForm extends Form
         		'options' => array(
         			'label' => 'Ui datetimepicker',
         			'extended' => array(
-                        'help'      => array('content' => 'Some UI datetimepicker')
+                        'help'      => array('content' => 'Some UI datetimepicker'),
+        				'inlineJsConfig' => array('closeText' => 'Kapat')
                     )
         		)
         	)
         );
+        
+        //echo $this->get('datetimepicker')->getConfig();
         
         $this->add(
         	array(
@@ -110,6 +113,8 @@ class TestForm extends Form
         		)
         	)
         );
+        
+        
         
         $this->add(
         	array(

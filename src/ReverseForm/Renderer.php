@@ -129,7 +129,7 @@ class Renderer implements ServiceManagerAwareInterface
             
             if($inlineJs = $element->getInlineJs() AND strlen($inlineJs) > 0) {
             	$this->view->placeholder($this->getJsHolderName())
-            		->append(sprintf($inlineJs, $element->getAttribute('id')));
+            		->append(sprintf($inlineJs, $element->getAttribute('id'), JsConfigRenderer::encode($element->getInlineJsConfig())));
             }
 
         }

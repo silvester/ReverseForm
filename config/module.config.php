@@ -1,7 +1,8 @@
 <?php
 
 return array(
-    'view_helpers' => array(
+    
+	'view_helpers' => array(
         'invokables' => array(
             'slugify' => 'ReverseForm\View\Helper\Slugify',
         ),
@@ -13,11 +14,13 @@ return array(
             }
         )
     ),
+    
     'view_manager' => array(
         'template_path_stack' => array(
             'ReverseFormElements' => __DIR__ . '/../view/element',
         ),
     ),
+    
     'reverse_form' => array(
         
         'settings' => array(
@@ -35,7 +38,13 @@ return array(
             'js' => array(
             	'https://maps.google.com/maps/api/js?sensor=false&region=SI'
             ),
-            'template' => 'googlemap.phtml'
+            'template' => 'googlemap.phtml',
+        	'inlineJs' => "var map = new google.maps.Map(document.getElementById('%1\$s'), %2\$s);\n$('#%1\$s').data('map', map);",
+        	'inlineJsConfig' => array(
+        		'zoom' 		=>  8,
+        		'mapTypeId'	=> new \Zend\Json\Expr('google.maps.MapTypeId.ROADMAP'),
+        		'center'	=> new \Zend\Json\Expr('new google.maps.LatLng(46.15, 14.9)')
+        	)
         ),
         
         'ReverseForm\Element\JqueryUiDatepicker' => array(
@@ -43,7 +52,7 @@ return array(
                 '/vendor/jquery-ui/dist/minified/jquery.ui.datepicker.min.js'),
             'css' => array('/vendor/jquery-ui/dist/jquery-ui.css'),
             'template' => 'input.phtml',
-        	'inlineJs' => "$('#%s').datepicker();"
+        	'inlineJs' => "$('#%1\$s').datepicker(%2\$s);\n"
         ),
         
         'ReverseForm\Element\JqueryUiDateRangePicker' => array(
@@ -57,7 +66,7 @@ return array(
                 '/vendor/jQuery-UI-Date-Range-Picker/css/ui.daterangepicker.css'
             ),
             'template' => 'input.phtml',
-        	'inlineJs' => "$('#%s').daterangepicker();"
+        	'inlineJs' => "$('#%1\$s').daterangepicker(%2\$s);\n"
         ),
         
         'ReverseForm\Element\BootstrapDatepicker' => array(
@@ -68,7 +77,11 @@ return array(
             	'/vendor/datepicker/css/datepicker.css'
             ),
             'template' => 'input.phtml',
-            'inlineJs' => "$('#%s').datepicker({format: 'dd.mm.yyyy', weekStart: 1});"
+            'inlineJs' => "$('#%1\$s').datepicker(%2\$s);",
+        	'inlineJsConfig' => array(
+        		'format'	=> 'dd.mm.yyyy',
+        		'weekstart'	=> new \Zend\Json\Expr(1),	
+        	)
         ),
         
         'ReverseForm\Element\JqueryUiDatetimepicker' => array(
@@ -82,7 +95,13 @@ return array(
             	'/vendor/jQuery-Timepicker-Addon/jquery-ui-timepicker-addon.css'
             ),
             'template' => 'input.phtml',
-            'inlineJs' => "$('#%s').datetimepicker({closeText: 'zapri', currentText: 'zdaj', hourText: 'ura', minuteText: 'minuta'});"
+            'inlineJs' => "$('#%1\$s').datetimepicker(%2\$s);\n",
+        	'inlineJsConfig' => array(
+        		'closeText' 	=> 'Zapri',
+        		'currentText'	=> 'Zdaj',
+        		'hourText'		=> 'Ura',
+        		'minuteText'	=> 'Minuta'	
+        	)
         ),
         
     ),

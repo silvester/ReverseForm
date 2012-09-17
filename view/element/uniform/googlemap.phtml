@@ -41,9 +41,3 @@
     <?php } ?>
     
 </div>
-
-<?php $this->placeholder($e->getJsHolderName())->captureStart() ?>
-var myOptions = {zoom: 8, mapTypeId: google.maps.MapTypeId.ROADMAP, center: new google.maps.LatLng(46.15, 14.9)};
-var map = new google.maps.Map(document.getElementById("<?= $e->getAttribute('id'); ?>"), myOptions);
-$('#<?= $e->getAttribute('id'); ?>').data('map', map);
-<?php $this->placeholder($e->getJsHolderName())->captureEnd() ?>
