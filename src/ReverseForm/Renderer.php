@@ -158,6 +158,11 @@ class Renderer implements ServiceManagerAwareInterface
     {
         return $this->view->formHidden($element);
     }
+    
+    public function formCaptcha($element)
+    {
+        return $this->view->formInput($element);
+    }
 
     /**
      * Retrieve the FormLabel helper

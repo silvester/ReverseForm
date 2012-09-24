@@ -2,13 +2,14 @@ ReverseForm
 ===========
 
 This is an early alpha, things do work but may be changed how they work in future. 
+Demo form can be viewed at: http://reverseform.modo.si/album/test-form
 
 Introduction
 ------------
 
 ReverseForm is a form rendering module. It creates the renderer objects through 
 a view helper. It also provides an object which extends Zend\Form\Element called 
-ReverseFor\ExtendedElement which will be usefull to create more complicated elements faster.
+ReverseForm\ExtendedElement which will be usefull to create more complicated elements faster.
 
 Goals
 -----
@@ -50,40 +51,47 @@ Usage
 
 ### In your view script do:
 
-    <?php
-        $form = $this->form;
-        $form->setAttribute('action', $this->url('album', array('action' => 'test-form')));
-        $formRenderer = $this->formRenderer($form, 'renderer.bootstrap', 'horizontal');
-        $formRenderer->prepare();
-        echo $formRenderer->openTag();
-    ?>
-    <fieldset class="<?= $formRenderer->_formStyle; ?>">
-    <legend>Some Legend</legend>
-    <?= $formRenderer->formHidden($form->get('security')); ?>
-    <?= $formRenderer->formRow($form->get('status')); ?>
-    <?= $formRenderer->formRow($form->get('status2')); ?>
-    <?= $formRenderer->formRow($form->get('status3')); ?>
-
-    <?= $formRenderer->formRow($form->get('datepicker')); ?>
-    <?= $formRenderer->formRow($form->get('datetimepicker')); ?>
-
-    <?php //$formRenderer->formRow($form->get('bootstrap-datepicker')); ?>
-
-    <?= $formRenderer->formRow($form->get('gmap')); ?>
-
-    <?= $formRenderer->formRow($form->get('artist')); ?>
-    <?= $formRenderer->formRow($form->get('title')); ?>
-    <?= $formRenderer->formRow($form->get('file')); ?>
-
-    <?= $formRenderer->formRow($form->get('countrytextarea')); ?>
-    <?= $formRenderer->formAction($form->get('actions')); ?>
-    </fieldset>
-    <?= $formRenderer->closeTag(); ?>
-    <script>
-    $(document).ready(function(){
-        <?= $formRenderer->getElementJsContent(); ?>
-    });
-    </script>
+	<h1>Form Testing</h1>
+	<?php
+	$form = $this->form;
+	$form->setAttribute('action', $this->url('album', array('action' => 'test-form')));
+	$formRenderer = $this->formRenderer($form, 'renderer.uniform', 'horizontal');
+	$formRenderer->prepare();
+	echo $formRenderer->openTag();
+	?>
+	
+	<div class="well">
+	    <?php print_r($form->getMessages()); ?>
+	</div>
+	
+	<fieldset class="<?= $formRenderer->_formStyle; ?>">
+	
+	<legend>Some Legend</legend>
+	
+	<?= $formRenderer->formHidden($form->get('security')); ?>
+	<?= $formRenderer->formRow($form->get('status')); ?>
+	<?= $formRenderer->formRow($form->get('status2')); ?>
+	<?= $formRenderer->formRow($form->get('status3')); ?>
+	
+	<?= $formRenderer->formRow($form->get('codemirrortest')); ?>
+	<?= $formRenderer->formRow($form->get('tinymcetest')); ?>
+	
+	<?= $formRenderer->formRow($form->get('datepicker')); ?>
+	<?= $formRenderer->formRow($form->get('datetimepicker')); ?>
+	<?= $formRenderer->formRow($form->get('daterangepicker')); ?>
+	
+	<?= $formRenderer->formRow($form->get('gmap')); ?>
+	<?= $formRenderer->formRow($form->get('artist')); ?>
+	<?= $formRenderer->formRow($form->get('title')); ?>
+	<?= $formRenderer->formRow($form->get('file')); ?>
+	
+	<?= $formRenderer->formRow($form->get('countrytextarea')); ?>
+	<?= $formRenderer->formAction($form->get('actions')); ?>
+	</fieldset>
+	
+	<?= $formRenderer->closeTag(); ?>
+	
+	<script>$(document).ready(function(){<?= $formRenderer->getElementJsContent(); ?>});</script>
 
 
 ### In your action do:
@@ -109,6 +117,6 @@ TODO
 ---
 
 * Many element view scripts look the same, only difference is the js part. 
-Refactor all same lloking elements in to one viewscript.
+Refactor all same looking elements in to one viewscript. COMPLETED.
 * Write some decent documentation.
 * Demo module is on it's way.

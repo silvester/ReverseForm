@@ -8,7 +8,7 @@ class JqueryUiDatepicker extends ExtendedElement
 {
 	
 	protected $attributes = array(
-		'type' => 'date',
+		'type' => 'text',
 	);
 
 }

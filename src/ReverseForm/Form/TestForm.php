@@ -30,8 +30,7 @@ class TestForm extends Form
         $this->add(array(
             'name' => 'file',
             'attributes' => array(
-                'type' => 'file',
-                'required' => 'required'
+                'type' => 'file'
             ),
             'options' => array(
                 'label' => 'Some file input',
@@ -176,12 +175,28 @@ class TestForm extends Form
         $this->add(array(
         	'name' => 'codemirrortest',
         	'type'  => 'ReverseForm\Element\CodeMirror',
-        	'attributes' => array('required' => 'required', 'value' => '', 'rows' => 10),
+        	'attributes' => array('value' => '', 'rows' => 10),
         	'options' => array(
         		'label'     => 'CodeMirror',
         		'extended'  => array('help' => array('content' => 'CodeMirror'))
         	)
         ));
+        
+        $this->add(array(
+        	'name' => 'tinymcetest',
+        	'type'  => 'ReverseForm\Element\TinyMce',
+        	'attributes' => array('value' => '', 'rows' => 20),
+        	'options' => array(
+        		'label'     => 'Tiny MCE',
+        		'extended'  => array('help' => array('content' => 'Tiny MCE'))
+        	)
+        ));
+        
+        $captcha = new \Zend\Form\Element\Captcha('captcha');
+        $captcha->setCaptcha(new \Zend\Captcha\Image(array('font' => '/var/www/akrabat.modo.si/data/font20.ttf', 'wordlen' => 4)));
+        $captcha->setLabel('Please verify you are human');
+        
+        $this->add($captcha);
 
 
         $actions = new \Zend\Form\Fieldset('actions');
