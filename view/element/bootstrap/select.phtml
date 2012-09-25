@@ -13,10 +13,10 @@
 
 <div class="control-group <?php if($err){ echo "error";}?>">
     <label class="control-label" for="<?= $e->getAttribute('id'); ?>">
-        <?= $label ?>
+        <?php if($label) { ?><?php if($required) { echo '<em>*</em>'; } ?><?= $label; ?><?php } ?>
     </label>
     <div class="controls">
-    <?php echo $this->formSelect($e);  ?>
+    <?php echo $this->reverseFormSelect($e);  ?>
     <?php if(count($extended['help']) > 0) { ?>
     <span class="help-block">
         <?php if($labelHelperTranlator) { 

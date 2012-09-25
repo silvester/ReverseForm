@@ -97,8 +97,7 @@ class TestForm extends Form
             )
         );
 
-        //echo $this->get('datetimepicker')->getConfig();
-
+        
         $this->add(
             array(
                 'name' => 'daterangepicker',
@@ -136,7 +135,7 @@ class TestForm extends Form
             'options' => array(
                 'label' => 'Status',
                 'extended' => array('help' => array('content' => 'some help'), 'compact' => false),
-                'value_options'   => array(1 => 'ON', 0 => 'OFF'),
+                'value_options'   => array(1 => 'ON', 0 => 'OFF')
             )
         ));
 
@@ -153,22 +152,24 @@ class TestForm extends Form
         $this->add(array(
             'name' => 'status3',
             'type'  => 'Zend\Form\Element\Select',
-            'attributes' => array('required' => 'required', 'value' => 2),
+            'attributes' => array('value' => 2),
             'options' => array(
                 'label'     => 'Status 3',
                 'extended'  => array('help' => array('content' => 'some help 3')),
                 'value_options'   => array(1 => 'ON', 0 => 'OFF'),
+                'value_options'   => $this->getf(),
             )
         ));
         
         $this->add(array(
         	'name' => 'status4',
         	'type'  => 'ReverseForm\Element\ChosenSelect',
-        	'attributes' => array('required' => 'required', 'value' => 2),
+        	'attributes' => array('required' => 'required', 'multiple' => 'multiple'),
         	'options' => array(
-        		'label'     => 'Status 4',
-        		'extended'  => array('help' => array('content' => 'some help 4')),
-        		'value_options'   => array(1 => 'ON', 0 => 'OFF'),
+        		'label'     => 'Chosen JS',
+        		'extended'  => array('help' => array('content' => 'Chosen JS')),
+        		'value_options'   => $this->getf(),
+        	    'empty_option'    => 'choose Some'
         	)
         ));
         
@@ -231,6 +232,17 @@ class TestForm extends Form
             'name' => 'security'
         ));
 
+    }
+    
+    public function getf()
+    {
+        
+        return array(
+            1 => 'kull',
+            2 => 'not so kull',
+            'yurope' => array('options' => array(1 => 'kull', 2 => 'not soo kul'), 'label' => 'yurope')
+        );
+                
     }
 
 }

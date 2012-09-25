@@ -5,6 +5,7 @@ return array(
     'view_helpers' => array(
         'invokables' => array(
             'slugify' => 'ReverseForm\View\Helper\Slugify',
+            'reverseFormSelect' => 'ReverseForm\View\Helper\ReverseFormSelect',
         ),
         'factories' => array(
             'formRenderer' => function ($sm) {
