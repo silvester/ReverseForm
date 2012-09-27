@@ -1,8 +1,11 @@
 ReverseForm
 ===========
 
-This is an early alpha, things do work but may be changed how they work in future. 
-Demo form can be viewed at: http://reverseform.modo.si/album/test-form
+This is an early alpha, things do work but may be changed how they work in future.
+
+Uni-Form form demo at: http://reverseform.modo.si/form/test-uniform
+
+Twitter Bootstrap form demo at: http://reverseform.modo.si/form/test-bootstrap
 
 Introduction
 ------------
@@ -120,3 +123,4 @@ TODO
 Refactor all same looking elements in to one viewscript. COMPLETED.
 * Write some decent documentation.
 * Demo module is on it's way.
+* Figure out fieldset templates current way is too ugly
