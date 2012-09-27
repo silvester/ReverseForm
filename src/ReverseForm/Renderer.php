@@ -11,7 +11,6 @@ use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\View\Helper\EscapeHtml;
 use Zend\View\Helper\EscapeHtmlAttr;
 
-
 class Renderer implements ServiceManagerAwareInterface
 {
 
@@ -29,13 +28,14 @@ class Renderer implements ServiceManagerAwareInterface
         $this->_formStyle = $formStyle;
         return $this;
     }
-    
+
     public function setForm(Form $form)
     {
         $this->_form = $form;
+        $this->_form->setAttribute('novalidate', 'novalidate');
         return $this;
     }
-    
+
     public function getForm()
     {
         return $this->_form;
@@ -120,16 +120,16 @@ class Renderer implements ServiceManagerAwareInterface
                     $this->view->headScript()->appendFile($j, 'text/javascript');
                 }
             }
-            
+
             if ($css = $element->getCss() AND is_array($css)) {
                 foreach ($css as $c) {
                     $this->view->headLink()->appendStylesheet($c);
                 }
             }
-            
-            if($inlineJs = $element->getInlineJs() AND strlen($inlineJs) > 0) {
-            	$this->view->placeholder($this->getJsHolderName())
-            		->append(sprintf($inlineJs, $element->getAttribute('id'), JsConfigRenderer::encode($element->getInlineJsConfig())));
+
+            if ($inlineJs = $element->getInlineJs() AND strlen($inlineJs) > 0) {
+                $this->view->placeholder($this->getJsHolderName())
+                    ->append(sprintf($inlineJs, $element->getAttribute('id'), JsConfigRenderer::encode($element->getInlineJsConfig())));
             }
 
         }
@@ -138,9 +138,8 @@ class Renderer implements ServiceManagerAwareInterface
 
     public function normalizeElement($element)
     {
-        if(!$element->getAttribute('id')) {
-            $element->setAttribute('id', 
-                    $this->getView()->slugify($element->getName()));
+        if (!$element->getAttribute('id')) {
+            $element->setAttribute('id', $this->getView()->slugify($element->getName()));
         }
     }
 
@@ -158,7 +157,7 @@ class Renderer implements ServiceManagerAwareInterface
     {
         return $this->view->formHidden($element);
     }
-    
+
     public function formCaptcha($element)
     {
         return $this->view->formInput($element);
@@ -169,6 +168,7 @@ class Renderer implements ServiceManagerAwareInterface
      *
      * @return FormLabel
      */
+
     protected function getLabelHelper()
     {
         if ($this->labelHelper) {
@@ -186,12 +186,12 @@ class Renderer implements ServiceManagerAwareInterface
         return $this->labelHelper;
     }
 
-
     /**
      * Retrieve the FormElement helper
      *
      * @return FormElement
      */
+
     protected function getElementHelper()
     {
         if ($this->elementHelper) {
@@ -209,12 +209,12 @@ class Renderer implements ServiceManagerAwareInterface
         return $this->elementHelper;
     }
 
-
     /**
      * Retrieve the FormElementErrors helper
      *
      * @return FormElementErrors
      */
+
     protected function getElementErrorsHelper()
     {
         if ($this->elementErrorsHelper) {
@@ -232,35 +232,35 @@ class Renderer implements ServiceManagerAwareInterface
         return $this->elementErrorsHelper;
     }
 
-
     /**
      * Retrieve the escapeHtml helper
      *
      * @return EscapeHtml
      */
+
     protected function getEscapeHtmlHelper()
     {
-    	if ($this->escapeHtmlHelper) {
-    		return $this->escapeHtmlHelper;
-    	}
+        if ($this->escapeHtmlHelper) {
+            return $this->escapeHtmlHelper;
+        }
 
-    	if (method_exists($this->view, 'plugin')) {
-    		$this->escapeHtmlHelper = $this->view->plugin('escapehtml');
-    	}
+        if (method_exists($this->view, 'plugin')) {
+            $this->escapeHtmlHelper = $this->view->plugin('escapehtml');
+        }
 
-    	if (!$this->escapeHtmlHelper instanceof EscapeHtml) {
-    		$this->escapeHtmlHelper = new EscapeHtml();
-    	}
+        if (!$this->escapeHtmlHelper instanceof EscapeHtml) {
+            $this->escapeHtmlHelper = new EscapeHtml();
+        }
 
-    	return $this->escapeHtmlHelper;
+        return $this->escapeHtmlHelper;
     }
-
 
     /**
      * Retrieve the escapeHtmlAttr helper
      *
      * @return EscapeHtmlAttr
      */
+
     protected function getEscapeHtmlAttrHelper()
     {
         if ($this->escapeHtmlAttrHelper) {
@@ -278,10 +278,9 @@ class Renderer implements ServiceManagerAwareInterface
         return $this->escapeHtmlAttrHelper;
     }
 
-
     public function setServiceManager(ServiceManager $serviceManager)
     {
-    	$this->serviceManager = $serviceManager;
+        $this->serviceManager = $serviceManager;
         $conf = $this->serviceManager->get('config');
         $this->globalFormConfig = $conf['reverse_form'];
         $this->localConfig = $this->globalFormConfig[get_class($this)];
