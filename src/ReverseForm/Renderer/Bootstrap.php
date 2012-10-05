@@ -72,6 +72,12 @@ class Bootstrap extends Renderer
 
         return $this->view->partial('bootstrap/input.phtml', array('element' => $element));
     }
+    
+    public function formCaptcha($element)
+    {
+        $this->normalizeElement($element);
+        return $this->view->partial('bootstrap/captcha.phtml', array('element' => $element));
+    }
 
     public function formCollection($element)
     {

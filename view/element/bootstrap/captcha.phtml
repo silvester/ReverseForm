@@ -1,0 +1,54 @@
+<?php
+    $e = $this->element;
+    $c = $e->getCaptcha();
+    $c->generate();
+    $labelHelper = $this->formLabel();
+    $label = $e->getLabel();
+    $labelHelperTranlator = $labelHelper->getTranslator();
+    if($label AND $labelHelperTranlator) {
+        $label = $labelHelperTranlator->translate($label, $labelHelper->getTranslatorTextDomain());
+    }
+    $extended = $e->getOption('extended');
+    if($e->getAttribute('type') == 'checkbox') {
+        $name = $e->getName().'[]';
+        $values = $e->getValue();
+    } else {
+        $name = $e->getName();
+        $values = array(0 => $e->getValue());
+    }
+    $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
+?>
+<div class="control-group <?php if($err){ echo "error";}?>">
+    <label class="control-label">
+        <?php if($label) { ?><?php if($e->getAttribute('required') == 'required') { echo '<em>*</em>'; } ?><?= $label; ?><?php } ?>
+    </label>
+    <div class="controls">
+        
+        <img width="<?= $c->getWidth(); ?>" height="<?= $c->getHeight(); ?>" alt="<?= $c->getImgAlt(); ?>"
+                    src="<?= $c->getImgUrl() . $c->getId() . $c->getSuffix(); ?>">
+    
+         <?= $this->captchaInputs($e); ?>
+
+        <?php if(count($extended['help']) > 0) { ?>
+        <span class="help-block">
+            <?php if($labelHelperTranlator) { 
+                echo $labelHelperTranlator->translate($extended['help']['content'], $labelHelper->getTranslatorTextDomain());
+            } else {
+                echo $extended['help']['content'];
+            } ?>
+        </span>
+        <?php } ?>
+        
+    </div>
+    <?php if($err) { ?>
+    <ul>
+    <?php foreach($err as $k => $v) { ?>
+    	<li><?php if($labelHelperTranlator) { 
+            echo $labelHelperTranlator->translate($v, $labelHelper->getTranslatorTextDomain());
+        } else {
+            echo $v;
+        } ?></li>
+    <?php } ?>
+    </ul>
+    <?php } ?>
+</div>
