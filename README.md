@@ -25,7 +25,7 @@ Form Renderers
 --------------
 
 Currently I provide 2 types of renderers, but it is simple to create other renderers by
- extending the ReverseForm\Renderer.
+ extending the ReverseForm\Renderer. Before you start take a look at the `/config/module.config.php` all of the options are there.
 
 * ReverseForm\Renderer\Uniform renders the form with extra markup to make it work with 
 [Uni-Form](http://sprawsm.com/uni-form/).
@@ -82,6 +82,7 @@ Usage
 	<?= $formRenderer->formRow($form->get('datepicker')); ?>
 	<?= $formRenderer->formRow($form->get('datetimepicker')); ?>
 	<?= $formRenderer->formRow($form->get('daterangepicker')); ?>
+	<?= $formRenderer->formCaptcha($form->get('captchaImage')); ?>
 	
 	<?= $formRenderer->formRow($form->get('gmap')); ?>
 	<?= $formRenderer->formRow($form->get('artist')); ?>
