@@ -1,5 +1,7 @@
 <?php
     $e = $this->element;
+    $c = $e->getCaptcha();
+    $c->generate();
     $labelHelper = $this->formLabel();
     $label = $e->getLabel();
     $labelHelperTranlator = $labelHelper->getTranslator();
@@ -10,11 +12,23 @@
     $required = ($e->getAttribute('required') == 'required') ? 'required="required"' : false;
     $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
 ?>
-<div class="ctrlHolder <?php if($err){ echo "error";}?>">
+
+<div class="ctrlHolder <?php if($err){ echo "error";}?> last">
     <label for="<?= $e->getAttribute('id'); ?>">
         <?php if($label) { ?><?php if($required) { echo '<em>*</em>'; } ?><?= $label; ?><?php } ?>
     </label>
-    <?php echo $this->formTextarea($e); ?>
+    
+    <ul <?php if($extended['compact']) { echo 'class="alternate"'; } ?>>
+        
+        <li>
+            <img width="<?= $c->getWidth(); ?>" height="<?= $c->getHeight(); ?>" alt="<?= $c->getImgAlt(); ?>"
+                src="<?= $c->getImgUrl() . $c->getId() . $c->getSuffix(); ?>">
+        </li>
+        <li>
+            <?= $this->captchaInputs($e); ?>
+        </li>
+    </ul>
+    
     <?php if(count($extended['help']) > 0) { ?>
     <p class="formHint">
         <?php if($labelHelperTranlator) { 

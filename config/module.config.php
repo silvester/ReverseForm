@@ -6,6 +6,7 @@ return array(
         'invokables' => array(
             'slugify' => 'ReverseForm\View\Helper\Slugify',
             'reverseFormSelect' => 'ReverseForm\View\Helper\ReverseFormSelect',
+            'captchaInputs' => 'ReverseForm\View\Helper\CaptchaInputs',
         ),
         'factories' => array(
             'formRenderer' => function ($sm) {
@@ -107,6 +108,46 @@ return array(
                 'hourText'		=> 'Ura',
                 'minuteText'	=> 'Minuta'
             )
+        ),
+        
+        'ReverseForm\Element\JqueryUiSpinner' => array(
+            'js' => array(
+                '/vendor/jquery.ui.spinner/ui.spinner.js',
+                '/vendor/jquery-ui/dist/minified/jquery.ui.widget.min.js',
+                '/vendor/jquery-ui/dist/minified/jquery.ui.position.min.js',
+                '/vendor/jquery-ui/dist/minified/jquery.ui.button.min.js',
+                '/vendor/jquery-ui/dist/minified/jquery.ui.mouse.min.js',
+                '/vendor/jquery-ui/dist/minified/jquery.ui.slider.min.js'
+            ),
+            'css' => array(
+                '/vendor/jquery.ui.spinner/ui.spinner.css'
+            ),
+            'template' => 'input.phtml',
+            'inlineJs' => "$('#%1\$s').spinner(%2\$s);\n",
+            /*
+            'inlineJsConfig' => array(
+                'min' 	    => '',
+                'max'	    => '',
+                'places'    => '',
+                'step'	    => '',
+                'largeStep'	=> '',
+                'group'	    => '',
+                'point'	    => '',
+                'prefix'	=> '',
+                'suffix'	=> '',
+                'className'	=> '',
+                'showOn'	=> '',
+                'width'	    => '',
+                'increment'	=> '',
+                'count'	    => '',
+                'mult'	    => '',
+                'delay'	    => '',
+                'mouseWheel'=> '',
+                'allowNull'	=> '',
+                'format'	=> '',
+                'parse'	    => ''
+            )
+            */
         ),
         
         'ReverseForm\Element\ChosenSelect' => array(

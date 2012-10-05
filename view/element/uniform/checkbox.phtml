@@ -17,9 +17,9 @@
     $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
 ?>
 <div class="ctrlHolder">
-    <p class="label">
+    <label>
         <?php if($label) { ?><?php if($e->getAttribute('required') == 'required') { echo '<em>*</em>'; } ?><?= $label; ?><?php } ?>
-    </p>
+    </label>
     <ul <?php if($extended['compact']) { echo 'class="alternate"'; } ?>>
         <?php foreach($e->getOption('value_options') as $key => $value) { ?>
         <li>

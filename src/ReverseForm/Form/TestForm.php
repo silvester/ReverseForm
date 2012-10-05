@@ -44,10 +44,25 @@ class TestForm extends Form
                 'class' => 'input-mini'
             ),
             'options' => array(
-                'label' => 'Gimmi mani',
+                'label' => 'Title',
                 'extended' => array(
                     'help' => array('style' => 'block', 'content' => 'do some stuff'),
                     'prepend' => '$',
+                    'append' => '€'
+                )
+            ),
+        ));
+        
+        $this->add(array(
+            'name' => 'uispinner',
+            'type' => '\ReverseForm\Element\JqueryUiSpinner',
+            'attributes' => array(
+                'type' => 'text'
+            ),
+            'options' => array(
+                'label' => 'Ui Spinner',
+                'extended' => array(
+                    'help' => array('style' => 'block', 'content' => 'Some UI Spinner'),
                     'append' => '€'
                 )
             ),
@@ -112,8 +127,6 @@ class TestForm extends Form
             )
         );
 
-
-
         $this->add(
             array(
                 'name' => 'bootstrap-datepicker',
@@ -176,7 +189,7 @@ class TestForm extends Form
         $this->add(array(
         	'name' => 'codemirrortest',
         	'type'  => 'ReverseForm\Element\CodeMirror',
-        	'attributes' => array('value' => '', 'rows' => 10),
+        	'attributes' => array('required' => 'required'),
         	'options' => array(
         		'label'     => 'CodeMirror',
         		'extended'  => array('help' => array('content' => 'CodeMirror'))
@@ -193,12 +206,14 @@ class TestForm extends Form
         	)
         ));
         
-        $captcha = new \Zend\Form\Element\Captcha('captcha');
-        $captcha->setCaptcha(new \Zend\Captcha\Image(array('font' => '/var/www/akrabat.modo.si/data/font20.ttf', 'wordlen' => 4)));
-        $captcha->setLabel('Please verify you are human');
         
-        $this->add($captcha);
-
+        
+        $captchaImage = new \Zend\Form\Element\Captcha('captchaImage');
+        $captchaImage->setCaptcha(new \Zend\Captcha\Image(array('font' => '/var/www/akrabat.modo.si/data/font20.ttf', 'wordlen' => 4)));
+        $captchaImage->setLabel('Please verify you are human OK ?');
+        $captchaImage->setAttribute('class', 'textInput');
+        
+        $this->add($captchaImage);        
 
         $actions = new \Zend\Form\Fieldset('actions');
         $actions->add(array(

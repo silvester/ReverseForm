@@ -16,13 +16,13 @@
         <?php if($label) { ?><?php if($required) { echo '<em>*</em>'; } ?><?= $label; ?><?php } ?>
     </label>
     <div class="controls">
-    <?php if($extended['append'] OR $extended['prepend']) {?>
-    <div class="<?php if($extended['append']) {echo 'input-append'; }?> <?php if($extended['prepend']) {echo 'input-prepend'; }?>">
+    <?php if(isset($extended['append']) OR isset($extended['prepend'])) {?>
+    <div class="<?php if(isset($extended['append'])) {echo 'input-append'; }?> <?php if(isset($extended['prepend'])) {echo 'input-prepend'; }?>">
     <?php } ?>    
-    <?php if($extended['prepend']) { ?><span class="add-on"><?= $extended['prepend'] ?></span><?php } ?>
+    <?php if(isset($extended['prepend'])) { ?><span class="add-on"><?= $extended['prepend'] ?></span><?php } ?>
     <?php echo $this->formInput($e); ?>
-    <?php if($extended['append']) { ?><span class="add-on"><?= $extended['append'] ?></span><?php } ?>
-    <?php if($extended['append'] OR $extended['prepend']) { echo '</div>'; } ?> 
+    <?php if(isset($extended['append'])) { ?><span class="add-on"><?= $extended['append'] ?></span><?php } ?>
+    <?php if(isset($extended['append']) OR isset($extended['prepend'])) { echo '</div>'; } ?> 
     <?php if(count($extended['help']) > 0) { ?>
     <span class="help-block">
         <?php if($labelHelperTranlator) { 

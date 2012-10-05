@@ -45,7 +45,7 @@ class Uniform extends Renderer
         if($element instanceOf ExtendedElement) {
             if(isset($this->globalFormConfig[get_class($element)])){
                 $element->injectGlobalConfig(
-                        $this->globalFormConfig[get_class($element)]
+                    $this->globalFormConfig[get_class($element)]
                 );
             }
             $this->extractExtendedElementData($element);
@@ -72,6 +72,12 @@ class Uniform extends Renderer
 
         return $this->view->partial('uniform/input.phtml', array('element' => $element));
 
+    }
+    
+    public function formCaptcha($element)
+    {
+        $this->normalizeElement($element);
+        return $this->view->partial('uniform/captcha.phtml', array('element' => $element));
     }
 
     public function formCollection($element)

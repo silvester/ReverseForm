@@ -145,22 +145,22 @@ class Renderer implements ServiceManagerAwareInterface
 
     public function formRow($element)
     {
-        // implemenet it in the specific renderer
+        // implement it in the specific renderer
     }
 
     public function formCollection($element)
     {
-        // implemenet it in the specific renderer
+        // implement it in the specific renderer
+    }
+    
+    public function formCaptcha($element)
+    {
+        // implement it in the specific renderer
     }
 
     public function formHidden($element)
     {
         return $this->view->formHidden($element);
-    }
-
-    public function formCaptcha($element)
-    {
-        return $this->view->formInput($element);
     }
 
     /**
