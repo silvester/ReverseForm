@@ -21,6 +21,32 @@ Goals
 * Add an unified way of creating new elements. It should take care of the JS, CSS and configuration part of an element.
 * Elements should honor localization.
 
+Installation with Composer
+--------------------------
+
+1. Add this project in your `composer.json`:
+```json
+    "require": {
+        "silvester/reverse-form": "dev-master",
+    }
+```
+
+2. Fetch the repository with composer:
+```bash
+$ php composer.phar update
+```
+
+3. Enable it in your `application.config.php` file:
+```php
+return array(
+    'modules' => array(
+        // ...
+        'ReverseForm',
+    ),
+    // ...
+);
+```
+
 Form Renderers
 --------------
 
@@ -33,19 +59,21 @@ Currently I provide 2 types of renderers, but it is simple to create other rende
 
 ### Uniform Renderer
 
-    <?php
+```php
     $this->form->setAttribute('action', $this->url('album', array('action' => 'test-form')));
     $formRenderer = $this->formRenderer($form, 'renderer.uniform', 'vertical'); // vertical or horizontal
     $formRenderer->prepare(); // this is how you create it in your viewscript
+```
 
 Get your css from [Uni-Form](http://sprawsm.com/uni-form/). Check the path to load the files in the module_config.php.
 
 ### Bootstrap Renderer
 
-    <?php
+```php
     $this->form->setAttribute('action', $this->url('album', array('action' => 'test-form')));
     $formRenderer = $this->formRenderer($form, 'renderer.bootstrap', 'vertical'); // vertical or horizontal
     $formRenderer->prepare(); // this is how you create it in your viewscript
+```
 
 It does not auto load any css or js files in to your view. If you need to load extra files you can do it from the configuration.
 
@@ -55,6 +83,7 @@ Usage
 ### In your view script do:
 
 	<h1>Form Testing</h1>
+```php
 	<?php
 	$form = $this->form;
 	$form->setAttribute('action', $this->url('album', array('action' => 'test-form')));
@@ -96,10 +125,11 @@ Usage
 	<?= $formRenderer->closeTag(); ?>
 	
 	<script>$(document).ready(function(){<?= $formRenderer->getElementJsContent(); ?>});</script>
-
+```
 
 ### In your action do:
 
+```php
     $form = new ReverseForm\Form\TestForm();
 
     if ($this->getRequest()->isPost()) {
@@ -111,6 +141,7 @@ Usage
     }
 
     return array('form' => $form, 'post' => $this->getRequest()->getPost());
+```
 
 You would do it better
 ----------------------
