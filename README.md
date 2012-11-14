@@ -36,7 +36,7 @@ Installation with Composer
 $ php composer.phar update
 ```
 
-3. Enable it in your `application.config.php` file:
+3. Enable it in your `config/application.config.php` file:
 ```php
 return array(
     'modules' => array(
@@ -82,8 +82,8 @@ Usage
 
 ### In your view script do:
 
-	<h1>Form Testing</h1>
 ```php
+	<h1>Form Testing</h1>
 	<?php
 	$form = $this->form;
 	$form->setAttribute('action', $this->url('album', array('action' => 'test-form')));
