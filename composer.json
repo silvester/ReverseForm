@@ -1,0 +1,28 @@
+{
+    "name": "silvester/reverse-form",
+    "description": "Rendering ZF2 forms with viewscripts. It can be extended to render with other frameworks then Twitter Bootstrap.",
+    "minimum-stability": "dev",
+    "type" : "module",
+    "homepage" : "https://github.com/silvester/ReverseForm",
+    "keywords" : ["form", "zf2", "module", "uniForm"],
+    "license" : "MIT",
+    "authors": [
+        {
+            "name": "Silvester Maraz",
+            "email": "silvester.maraz@reverse.si",
+            "homepage": "http://maraz.org"
+        }
+    ],
+    "require": {
+		"php": ">=5.3.3",
+        "zendframework/zendframework": "2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "ReverseOAuth2": "src/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
+    }
+}
