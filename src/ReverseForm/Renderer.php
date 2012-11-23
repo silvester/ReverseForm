@@ -152,7 +152,7 @@ class Renderer implements ServiceManagerAwareInterface
     {
         // implement it in the specific renderer
     }
-    
+
     public function formCaptcha($element)
     {
         // implement it in the specific renderer
@@ -283,7 +283,9 @@ class Renderer implements ServiceManagerAwareInterface
         $this->serviceManager = $serviceManager;
         $conf = $this->serviceManager->get('config');
         $this->globalFormConfig = $conf['reverse_form'];
-        $this->localConfig = $this->globalFormConfig[get_class($this)];
+        if (array_key_exists(get_class($this), $this->globalFormConfig)) {
+            $this->localConfig = $this->globalFormConfig[get_class($this)];
+        }
         return $this;
     }
 
