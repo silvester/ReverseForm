@@ -15,24 +15,41 @@
         $values = array(0 => $e->getValue());
     }
     $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
+
+    $optionValues = $e->getOption('value_options');
 ?>
 <div class="control-group">
-    <label class="control-label">
-        <?php if($label) { ?><?php if($e->getAttribute('required') == 'required') { echo '<em>*</em>'; } ?><?= $label; ?><?php } ?>
-    </label>
-    <div class="controls">
-    <?php foreach($e->getOption('value_options') as $value => $key) { ?>
-        <label class="<?= $e->getAttribute('type'); ?><?php if($extended['compact']) { echo ' inline'; } ?>">
-        <input type="<?= $e->getAttribute('type'); ?>"
-               value="<?= $value; ?>" <?php if(is_array($values) && in_array($value, $values)){ echo 'checked="checked"'; } ?> 
-               name="<?= $name; ?>" id="<?= $this->slugify($e->getName().'-'.$value); ?>">
-        <?php if($labelHelperTranlator) { 
-            echo $labelHelperTranlator->translate($key, $labelHelper->getTranslatorTextDomain());
-        } else {
-            echo $key;
-        } ?>
+    <?php if (empty($optionValues)): ?>
+        <label class="control-label" for="<?php echo $e->getAttribute('id') ?>">
+            <?php if($e->getAttribute('required') == 'required') echo '<em>*</em>'; ?><?php echo $label; ?>
         </label>
-    <?php } ?>
+        <div class="controls">
+            <?php if ($e->useHiddenElement()): ?>
+                <input type="hidden" name="<?php echo $e->getName(); ?>" value="<?php echo $e->getUncheckedValue(); ?>"/>
+            <?php endif; ?>
+            <input type="<?php echo $e->getAttribute('type'); ?>"
+                   id="<?php echo $e->getAttribute('id'); ?>"
+                   name="<?php echo $e->getName(); ?>"
+                   value="<?php echo $e->getCheckedValue(); ?>"
+                   <?php if ($e->isChecked()): ?>checked="checked"<?php endif ?>/>
+    <?php else: ?>
+        <label class="control-label">
+            <?php if($label) { ?><?php if($e->getAttribute('required') == 'required') { echo '<em>*</em>'; } ?><?= $label; ?><?php } ?>
+        </label>
+        <div class="controls">
+        <?php foreach($optionValues as $value => $key) { ?>
+            <label class="<?= $e->getAttribute('type'); ?><?php if($extended['compact']) { echo ' inline'; } ?>">
+            <input type="<?= $e->getAttribute('type'); ?>"
+                   value="<?= $value; ?>" <?php if(is_array($values) && in_array($value, $values)){ echo 'checked="checked"'; } ?>
+                   name="<?= $name; ?>" id="<?= $this->slugify($e->getName().'-'.$value); ?>">
+            <?php if($labelHelperTranlator) {
+                echo $labelHelperTranlator->translate($key, $labelHelper->getTranslatorTextDomain());
+            } else {
+                echo $key;
+            } ?>
+            </label>
+        <?php } ?>
+    <?php endif; ?>
     <?php if(count($extended['help']) > 0) { ?>
     <span class="help-block">
         <?php if($labelHelperTranlator) { 
