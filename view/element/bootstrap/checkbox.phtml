@@ -7,12 +7,14 @@
         $label = $labelHelperTranlator->translate($label, $labelHelper->getTranslatorTextDomain());
     }
     $extended = $e->getOption('extended');
-    if($e->getAttribute('type') == 'checkbox') {
+    if($e->getAttribute('type') == 'checkbox' || $e->getAttribute('type') == 'multi_checkbox') {
         $name = $e->getName().'[]';
         $values = $e->getValue();
+        $type = 'checkbox';
     } else {
         $name = $e->getName();
         $values = array(0 => $e->getValue());
+        $type = $e->getAttribute('type');
     }
     $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
 
@@ -37,9 +39,12 @@
             <?php if($label) { ?><?php if($e->getAttribute('required') == 'required') { echo '<em>*</em>'; } ?><?= $label; ?><?php } ?>
         </label>
         <div class="controls">
+        <?php if ($e->useHiddenElement()): ?>
+            <input type="hidden" name="<?php echo $e->getName(); ?>" value="<?php echo $e->getUncheckedValue(); ?>"/>
+        <?php endif; ?>
         <?php foreach($optionValues as $value => $key) { ?>
-            <label class="<?= $e->getAttribute('type'); ?><?php if($extended['compact']) { echo ' inline'; } ?>">
-            <input type="<?= $e->getAttribute('type'); ?>"
+            <label class="<?= $type; ?><?php if($extended['compact']) { echo ' inline'; } ?>">
+            <input type="<?= $type; ?>"
                    value="<?= $value; ?>" <?php if(is_array($values) && in_array($value, $values)){ echo 'checked="checked"'; } ?>
                    name="<?= $name; ?>" id="<?= $this->slugify($e->getName().'-'.$value); ?>">
             <?php if($labelHelperTranlator) {
