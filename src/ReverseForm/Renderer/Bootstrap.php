@@ -102,6 +102,8 @@ class Bootstrap extends Renderer
             $label = $element->getLabel();
             if (!empty($label)) {
                 $label = $escapeHtmlHelper($label);
+                $labelTranslator = $this->getLabelHelper()->getTranslator();
+                if ($labelTranslator) $label = $labelTranslator->translate($label);
                 $markup = sprintf(
                     '<fieldset><legend>%s</legend>%s</fieldset>', $label, $markup
                 );
