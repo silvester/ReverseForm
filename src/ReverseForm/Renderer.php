@@ -22,6 +22,8 @@ class Renderer implements ServiceManagerAwareInterface
 
     public $localConfig = array();
     public $globalFormConfig = array();
+    
+    protected $escapeHtmlHelper;
 
     public function setFormStyle($formStyle)
     {
