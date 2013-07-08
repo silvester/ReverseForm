@@ -25,11 +25,10 @@
         } ?>
     </span>
     <?php } ?>
-    </div>
     <?php if($err) { ?>
     <ul>
     <?php foreach($err as $k => $v) { ?>
-    	<li><?php if($labelHelperTranlator) { 
+    	<li><?php if($labelHelperTranlator) {
             echo $labelHelperTranlator->translate($v, $labelHelper->getTranslatorTextDomain());
         } else {
             echo $v;
@@ -37,4 +36,5 @@
     <?php } ?>
     </ul>
     <?php } ?>
+    </div>
 </div>

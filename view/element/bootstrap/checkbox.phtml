@@ -1,57 +1,80 @@
 <?php
-    $e = $this->element;
-    $labelHelper = $this->formLabel();
-    $label = $e->getLabel();
-    $labelHelperTranlator = $labelHelper->getTranslator();
-    if($label AND $labelHelperTranlator) {
-        $label = $labelHelperTranlator->translate($label, $labelHelper->getTranslatorTextDomain());
-    }
-    $extended = $e->getOption('extended');
-    if($e->getAttribute('type') == 'checkbox') {
-        $name = $e->getName().'[]';
-        $values = $e->getValue();
-    } else {
-        $name = $e->getName();
-        $values = array(0 => $e->getValue());
-    }
-    $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
+/**
+ * @var $e \Zend\Form\Element\Checkbox
+ * @var $labelHelper \Zend\Form\View\Helper\FormLabel
+ */
+$e = $this->element;
+$labelHelper = $this->formLabel();
+$label = $e->getLabel();
+$labelHelperTranslator = $labelHelper->getTranslator();
+if ($label && $labelHelperTranslator) {
+    $label = $labelHelperTranslator->translate($label, $labelHelper->getTranslatorTextDomain());
+}
+$extended = $e->getOption('extended');
+if ($e->getAttribute('type') == 'checkbox' || $e->getAttribute('type') == 'multi_checkbox') {
+    $name = $e->getName() . '[]';
+    $values = $e->getValue();
+    $type = 'checkbox';
+} else {
+    $name = $e->getName();
+    $values = array(0 => $e->getValue());
+    $type = $e->getAttribute('type');
+}
+$err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
+
+$optionValues = $e->getOption('value_options');
 ?>
 <div class="control-group">
-    <label class="control-label">
-        <?php if($label) { ?><?php if($e->getAttribute('required') == 'required') { echo '<em>*</em>'; } ?><?= $label; ?><?php } ?>
+    <?php if (empty($optionValues)): ?>
+    <label class="control-label" for="<?php echo $e->getAttribute('id') ?>">
+        <?php if ($e->getAttribute('required') == 'required') echo '<em>*</em>'; ?><?php echo $label; ?>
     </label>
+
     <div class="controls">
-    <?php foreach($e->getOption('value_options') as $value => $key) { ?>
-        <label class="<?= $e->getAttribute('type'); ?><?php if($extended['compact']) { echo ' inline'; } ?>">
-        <input type="<?= $e->getAttribute('type'); ?>"
-               value="<?= $value; ?>" <?php if(is_array($values) && in_array($value, $values)){ echo 'checked="checked"'; } ?> 
-               name="<?= $name; ?>" id="<?= $this->slugify($e->getName().'-'.$value); ?>">
-        <?php if($labelHelperTranlator) { 
-            echo $labelHelperTranlator->translate($key, $labelHelper->getTranslatorTextDomain());
-        } else {
-            echo $key;
-        } ?>
+        <?php if ($e->useHiddenElement()): ?>
+            <input type="hidden" name="<?php echo $e->getName(); ?>" value="<?php echo $e->getUncheckedValue(); ?>"/>
+        <?php endif; ?>
+        <input type="<?php echo $e->getAttribute('type'); ?>"
+               id="<?php echo $e->getAttribute('id'); ?>"
+               name="<?php echo $e->getName(); ?>"
+               value="<?php echo $e->getCheckedValue(); ?>"
+               <?php if ($e->getAttribute('class')): ?>class="<?php echo $e->getAttribute('class') ?>"<?php endif; ?>
+               <?php if ($e->isChecked()): ?>checked="checked"<?php endif ?>/>
+        <?php else: ?>
+        <label class="control-label">
+            <?php if ($label): ?>
+                <?php if ($e->getAttribute('required')) echo '<em>*</em>'; ?><?php echo $label; ?>
+            <?php endif; ?>
         </label>
-    <?php } ?>
-    <?php if(count($extended['help']) > 0) { ?>
-    <span class="help-block">
-        <?php if($labelHelperTranlator) { 
-            echo $labelHelperTranlator->translate($extended['help']['content'], $labelHelper->getTranslatorTextDomain());
-        } else {
-            echo $extended['help']['content'];
-        } ?>
-    </span>
-    <?php } ?>
+
+        <div class="controls">
+            <?php if ($e->useHiddenElement()): ?>
+                <input type="hidden" name="<?php echo $e->getName(); ?>"
+                       value="<?php echo $e->getUncheckedValue(); ?>"/>
+            <?php endif; ?>
+            <?php foreach ($optionValues as $value => $key): ?>
+                <label class="<?php echo $type; ?><?php if ($extended['compact']) echo ' inline'; ?>">
+                    <input type="<?php echo $type; ?>"
+                           value="<?php echo $value; ?>"
+                           name="<?php echo $name; ?>" id="<?php echo $this->slugify($e->getName() . '-' . $value); ?>"
+                        <?php if (is_array($values) && in_array($value, $values)) echo 'checked="checked"'; ?>>
+                    <?php echo $labelHelperTranslator ? $labelHelperTranslator->translate($key, $labelHelper->getTranslatorTextDomain()) : $key ?>
+                </label>
+            <?php endforeach; ?>
+            <?php endif; ?>
+            <?php if (count($extended['help'])): ?>
+                <span class="help-block">
+                    <?php $labelHelperTranslator ? $labelHelperTranslator->translate($extended['help']['content'], $labelHelper->getTranslatorTextDomain()) : $extended['help']['content'] ?>
+                </span>
+            <?php endif; ?>
+            <?php if ($err): ?>
+                <ul>
+                    <?php foreach ($err as $k => $v): ?>
+                        <li>
+                            <?php echo $labelHelperTranslator ? $labelHelperTranslator->translate($v, $labelHelper->getTranslatorTextDomain()) : $v ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+        </div>
     </div>
-    <?php if($err) { ?>
-    <ul>
-    <?php foreach($err as $k => $v) { ?>
-    	<li><?php if($labelHelperTranlator) { 
-            echo $labelHelperTranlator->translate($v, $labelHelper->getTranslatorTextDomain());
-        } else {
-            echo $v;
-        } ?></li>
-    <?php } ?>
-    </ul>
-    <?php } ?>
-</div>
