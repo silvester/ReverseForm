@@ -21,7 +21,7 @@
         <?php if($label) { ?><?php if($e->getAttribute('required') == 'required') { echo '<em>*</em>'; } ?><?= $label; ?><?php } ?>
     </label>
     <div class="controls">
-    <?php foreach($e->getOption('value_options') as $value => $key) { ?>
+    <?php foreach($e->getOptions() as $value => $key) { ?>
         <label class="<?= $e->getAttribute('type'); ?><?php if($extended['compact']) { echo ' inline'; } ?>">
         <input type="<?= $e->getAttribute('type'); ?>"
                value="<?= $value; ?>" <?php if(is_array($values) && in_array($value, $values)){ echo 'checked="checked"'; } ?> 
