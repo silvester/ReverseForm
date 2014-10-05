@@ -9,6 +9,10 @@
     $extended = $e->getOption('extended');
     $required = ($e->getAttribute('required') == 'required') ? 'required="required"' : false;
     $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
+
+    if($e->getAttribute('type') == "hidden"){
+        echo $this->formInput($e);
+    }else{
 ?>
 
 <div class="ctrlHolder <?php if($err){ echo "error";}?> last">
@@ -37,3 +41,4 @@
     </ul>
     <?php } ?>
 </div>
+<?php } ?>
