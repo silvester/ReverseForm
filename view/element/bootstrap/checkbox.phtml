@@ -40,6 +40,7 @@ $optionValues = $e->getOption('value_options');
                value="<?php echo $e->getCheckedValue(); ?>"
                <?php if ($e->getAttribute('class')): ?>class="<?php echo $e->getAttribute('class') ?>"<?php endif; ?>
                <?php if ($e->isChecked()): ?>checked="checked"<?php endif ?>/>
+               <?php if ($e->getAttribute('disabled')): ?>disabled="disabled"<?php endif; ?>
         <?php else: ?>
         <label class="control-label">
             <?php if ($label): ?>
